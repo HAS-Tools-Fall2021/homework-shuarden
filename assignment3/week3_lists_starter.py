@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 # %%
 # ** MODIFY **
 # Set the file name and path to where you have stored the data
-filename = 'streamflow_week3.txt'
+filename = 'streamflow_wk3.txt'
 filepath = os.path.join('../data', filename)
 print(os.getcwd())
 print(filepath)
@@ -64,7 +64,7 @@ ilist = []
 # and adding the index value to the ilist
 # if it meets some criteria that I specify
 for i in range(len(flow)):
-        if flow [i] > 600 and month[i] == 7:
+        if flow [i] > 90 and month[i] == 7:
                 ilist.append(i)
 
 # see how many times the criteria was met by checking the length
@@ -82,3 +82,39 @@ ilist2 = [i for i in range(len(flow)) if flow[i] > 600 and month[i]==7]
 print(len(ilist2))
 
 
+
+# %%
+#1. What type of variables are `flow`, `year`, `month`, and `day`
+#   and how long are they?
+print("Flow is a", type(flow))
+print("The elements in flow are:", type (flow[0]))
+print("Flow is", len(flow), "long")
+#2. How many times was the daily flow greater than your prediction 
+#   in the month of September (express your answer in terms of the total 
+#   number of times and as a percentage)?
+prediction = 90
+gt_list=[]
+setp_list=[]
+gt_list = [i for i in range(len(flow)) if flow[i] > prediction and month[i]==9]
+sept_list = [i for i in range(len(flow)) if month[i]==9]
+print("The flow was greater than my predition", len(gt_list), "times")
+print("this is", len(gt_list)/len(sept_list)*100, "% of the time")
+#3. How would your answer to the previous question change if you 
+#   considered only flows before 2000 or after 2010? 
+#   (again report total number of times and percentage)
+gt_list=[]
+setp_list=[]
+gt_list = [i for i in range(len(flow)) if flow[i] > prediction and \
+        month[i]==9 and year[i] >= 2010]
+print("The flow was greater than  my predition", len(gt_list), "time after 2010")
+print("this is", len(gt_list)/len(sept_list)*100, "% of the time after 2010")
+# 4. How does the flow generally change from the first half of
+# September to the second?
+first_half = [flow[i] for i in range(len(flow)) if month[i]==9 and day[i] <= 15]
+
+second_half = [flow[i] for i in range(len(flow)) if month[i]==9 and day[i] >= 15]
+
+
+print("First half average flows:", np.mean(first_half))
+print("Second half average flows:", np.mean(second_half))
+# %%
